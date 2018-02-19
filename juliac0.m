@@ -1,18 +1,20 @@
 %  Computes the filled Julia set (the initial points from which fixed point
 %  iteration remains bounded) for the function phi.
 
-phi = inline('z^2 - 1.25');   % Define the function whose fixed points we seek.
-fixpt1 = (1 + sqrt(6))/2;     % These are the fixed points.
-fixpt2 = (1 - sqrt(6))/2;
+phi = inline('z^2');   % Define the function whose fixed points we seek.
+syms x
+eqn=x^2==x;
+a = solve(eqn,x);     % These are the fixed points.
+fixpt1=a(1);fixpt2=a(2);
 
 colormap([1 0 0; 1 1 1]);     % Points numbered 1 (inside) will be colored red;
                               %   those numbered 2 (outside) will be colored white.
-M = 2*ones(71,181);          % Initialize array of point colors to 2 (white).
+M = 2*ones(201,201);          % Initialize array of point colors to 2 (white).
 
-for j=1:71                 % Try initial values with imaginary parts between
-  y = -.7 + (j-1)*.02;        %   -0.7 and 0.7
-  for i=1:181               % and with real parts between
-    x = -1.8 + (i-1)*.02;     %   -1.8 and 1.8.
+for j=1:201                 % Try initial values with imaginary parts between
+  y = -2 + (j-1)*.02;        %   -2 and 2
+  for i=1:201              % and with real parts between
+    x = -2 + (i-1)*.02;     %   -2 and 2
     z = x + 1i*y;             % 1i is the MATLAB symbol for sqrt(-1).
     zk = z;
     kount = 0;                % kount is the total number of iterations.
@@ -29,5 +31,5 @@ for j=1:71                 % Try initial values with imaginary parts between
   end
 end
 
-image([-1.8 1.8],[-.7 .7],M),  % This plots the results.
+image([-2 2],[-2 2],M),  % This plots the results.
 axis xy                        % If you don't do this, vertical axis is inverted.
