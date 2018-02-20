@@ -1,7 +1,7 @@
-function [ob,tof]=orbit_and_connect(z0)
+function [ob,tof,color]=orbit_and_connect(z0)
 z=z0;z1=z0;
 whether=true;
-for i=1:30
+for i=1:50
 
     ob(i)=z;
     z=f(z1);
@@ -17,7 +17,10 @@ if whether==true
 else
     tof='Not_connected';
 end
-
+x1=i/50;
+x2=1-x1;
+color=[1 x1 x2];
+plot(real(ob),imag(ob),'*','Color',color);
 
 
 
