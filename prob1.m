@@ -1,37 +1,34 @@
-%  Computes the filled Julia set (the initial points from which fixed point
-%  iteration remains bounded) for the function phi.
 
-phi = inline('z^2+(0.36+0.1i)'); % Define the function whose fixed points we seek.
-syms x
+phi = inline('z^2+(0.36+0.1i)'); 
 eqn=x^2+(0.36+0.1i)==x;
-a = solve(eqn,x);     % These are the fixed points.
+a = solve(eqn,x);     
 fixpt1=a(1);fixpt2=a(2);
 
-colormap([1 0 0; 1 1 1]);     % Points numbered 1 (inside) will be colored red;
-                              %   those numbered 2 (outside) will be colored white.
-M = 2*ones(201,201);          % Initialize array of point colors to 2 (white).
+colormap([1 0 0; 1 1 1]);    
+                             
+M = 2*ones(201,201);      
 
-for j=1:201,                  % Try initial values with imaginary parts between
-  y = -2 + (j-1)*.02;        %   -0.7 and 0.7
-  for i=1:201,                % and with real parts between
-    x = -2 + (i-1)*.02;     %   -1.8 and 1.8.
-    z = x + 1i*y;             % 1i is the MATLAB symbol for sqrt(-1).
+for j=1:201,                 
+  y = -2 + (j-1)*.02;       
+  for i=1:201,                
+    x = -2 + (i-1)*.02;    
+    z = x + 1i*y;             
     zk = z;
-    kount = 0;                % kount is the total number of iterations.
+    kount = 0;              
 
     while kount < 30 & abs(zk) < 2,
       kount = kount+1;
-      zk = phi(zk);           % This is the fixed point iteration.
+      zk = phi(zk);         
     end;
 
-    if abs(zk) < 2,           % If orbit is bounded, set this
-      M(j,i) = 1;             %   point color to 1 (red).
+    if abs(zk) < 2,         
+      M(j,i) = 1;           
     end;
 
   end;
 end;
 
-image([-2 2],[-2 2],M),  % This plots the results.
-axis xy                        % If you don't do this, vertical axis is inverted.
+image([-2 2],[-2 2],M),  
+axis xy                        
 
 
