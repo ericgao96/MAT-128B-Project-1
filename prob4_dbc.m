@@ -2,9 +2,9 @@ function fd = prob4_dbc(imageName)
 % Differential Box counting
 % X=double(imread('rice.tif')); 
 
-X=double(imread(imageName));                                   %transform the original image
+X=double(imread(imageName));                                   % transform the original image
 
-if size(X,1)~=size(X,2)                                        %Check whetehr M=N
+if size(X,1)~=size(X,2)                                        % Check whetehr M=N
    error('The size of X must NxN.'); 
 end
 
@@ -22,9 +22,9 @@ while temp>1                                                    % temp=1 means e
     for j=1:(B/L(h))                                            % locate the area of each part of the grid, j is by row, k is by column.
         for k=1:(B/L(h))
             area=X([L(h)*(j-1)+[1:L(h)],L(h)*(k-1)+[1:L(h)]]);
-            mn=min(area(1:end));                                %minimum gray level
-            mx=max(area(1:end));                                %maximum gray level
-            nr=fix(mx/L(h))-fix(mn/L(h))+1;                     %nr(i,j)=l-k+1
+            mn=min(area(1:end));                                % minimum gray level
+            mx=max(area(1:end));                                % maximum gray level
+            nr=fix(mx/L(h))-fix(mn/L(h))+1;                     % nr(i,j)=l-k+1
             temp2=temp2+nr;
         end
     end
