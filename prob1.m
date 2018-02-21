@@ -1,6 +1,6 @@
 
-phi = inline('z^2+(0.36+0.1i)'); 
-eqn=x^2+(0.36+0.1i)==x;
+phi = inline('z^2-1.25'); 
+eqn=x^2-1.25==x;
 a = solve(eqn,x);     
 fixpt1=a(1);fixpt2=a(2);
 
